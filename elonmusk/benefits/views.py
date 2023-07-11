@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .models import Benefit
+from .serializers import BenefitSerializer
+
+
+class BenefitViewSet(viewsets.ModelViewSet):
+    queryset = Benefit.objects.all()
+    serializer_class = BenefitSerializer

@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import NavigationLink
+
+
+@admin.register(NavigationLink)
+class NavigationLinkAdmin(admin.ModelAdmin):
+    list_display = ['id', 'link', 'href']
+    list_display_links = ['id']

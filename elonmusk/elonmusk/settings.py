@@ -1,12 +1,28 @@
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = ''
+load_dotenv(os.path.join(BASE_DIR, '..', '.env'))
 
-DEBUG = True
+DEBUG = os.getenv('DEBUG', True)
 
-ALLOWED_HOSTS = []
+SECRET_KEY = os.getenv('PRODUCTION_SECRET_KEY') if DEBUG else os.getenv('DEBUG_SECRET_KEY')
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1'
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+    'https://elon-musk-page.vercel.app'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -15,6 +31,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'corsheaders',
+
+    'benefits.apps.BenefitsConfig',
+    'navigation.apps.NavigationConfig'
 ]
 
 MIDDLEWARE = [
@@ -49,8 +71,12 @@ WSGI_APPLICATION = 'elonmusk.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
