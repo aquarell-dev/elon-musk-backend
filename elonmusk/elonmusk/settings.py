@@ -13,7 +13,8 @@ SECRET_KEY = os.getenv('PRODUCTION_SECRET_KEY') if DEBUG else os.getenv('DEBUG_S
 
 ALLOWED_HOSTS = [
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    'elon-musk-back-end.onrender.com'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
