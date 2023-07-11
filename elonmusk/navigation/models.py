@@ -11,7 +11,14 @@ class NavigationLink(models.Model):
     href = models.SlugField(
         'Путь ссылки',
         unique=True,
-        help_text='Путь ссылки в браузере. Старайтесь делать коротким!'
+        null=True,
+        blank=True,
+        help_text='Путь ссылки в браузере. Старайтесь делать коротким!',
+    )
+    order = models.PositiveSmallIntegerField(
+        'Приоритет Ссылки',
+        unique=True,
+        help_text='Позиция Ссылки В Навигационной Панели'
     )
 
     def __str__(self):

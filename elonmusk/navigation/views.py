@@ -5,5 +5,5 @@ from .serializers import NavigationLinkSerializer
 
 
 class NavigationLinkViewSet(viewsets.ModelViewSet):
-    queryset = NavigationLink.objects.all()
+    queryset = NavigationLink.objects.all().order_by('order')
     serializer_class = NavigationLinkSerializer
